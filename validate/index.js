@@ -4,7 +4,7 @@ exports.validateLuhn = (value) =>{
    // accept only digits, dashes or spaces
    if (/[^0-9-\s]+/.test(value)) return false;
 
-   // The Luhn Algorithm. It's so pretty.
+   // The Luhn Algorithm
        var nCheck = 0, nDigit = 0, bEven = false;
        value = value.replace(/\D/g, "");
    
@@ -24,5 +24,6 @@ exports.validateLuhn = (value) =>{
 }
 
 exports.validateNum = (num) =>{
+    //Check if credit card is numeric
    return isNaN(num)
 }
