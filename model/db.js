@@ -12,6 +12,7 @@ db.run(`CREATE TABLE if not exists users_card (
     card_id INTEGER  PRIMARY KEY,
     name VARCHAR(255),
     card_number INT,
+    balance INT DEFAULT 0,
     trans_limit INT,
     UNIQUE(card_number)
     
