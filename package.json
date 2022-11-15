@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./server"
+    "start": "node ./server",
+    "test": "jest --watchAll"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
