@@ -3,14 +3,18 @@ const router = express.Router();
 
 const dbConnect = require('../model/db')
 
-const {validateLuhn } = require('../validate')
+const {validateLuhn, validateNum } = require('../validate')
 
 const {body, validationResult } = require('express-validator')
 
 router.post('/', async (req, res, next)=>{
   const {name,card_number,trans_limit} = req.body
-
-   if(isNaN(card_number)){
+  if(!name){
+    res.status(201).json({
+      success: false,
+      message: "Name cannot be empty"
+    })
+  }else if(validateNum(card_number)){
     res.status(201).json({
       success: false,
       message: "Card Number must be numeric"
@@ -20,24 +24,20 @@ router.post('/', async (req, res, next)=>{
       success: false,
       message: "Please enter a valid credit card number"
     })
-   }
-
-
-
-  
-  const addCard = await dbConnect.insert(name, card_number,trans_limit)
-   if(addCard){
-          res.status(201).json({
-            success: true,
-            message: "Users card successfully added"
-          })
    }else{
-    res.status(201).json({
-      success: false,
-      message: "Problem adding data"
-    })
+    const addCard = await dbConnect.insert(name, card_number,trans_limit)
+    if(addCard){
+           res.status(201).json({
+             success: true,
+             message: "Users card successfully added"
+           })
+    }else{
+     res.status(201).json({
+       success: false,
+       message: "Problem adding data"
+     })
+    }
    }
-
 })
 
 /* GET cards listing. */

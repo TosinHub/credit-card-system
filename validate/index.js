@@ -1,9 +1,28 @@
 
 
-exports.validateLuhn = (num) =>{
-    return 0 === (num.replace(/\D/g, '').spit('').reverse.map(function (d,i){
-        return +['0123456789', '0246813579'] [i%2] [+d];
-    }).reduce(function(p,n){
-        return p + n
-    }) % 10)
+exports.validateLuhn = (value) =>{
+   // accept only digits, dashes or spaces
+   if (/[^0-9-\s]+/.test(value)) return false;
+
+   // The Luhn Algorithm. It's so pretty.
+       var nCheck = 0, nDigit = 0, bEven = false;
+       value = value.replace(/\D/g, "");
+   
+       for (var n = value.length - 1; n >= 0; n--) {
+           var cDigit = value.charAt(n),
+               nDigit = parseInt(cDigit, 10);
+   
+           if (bEven) {
+               if ((nDigit *= 2) > 9) nDigit -= 9;
+           }
+   
+           nCheck += nDigit;
+           bEven = !bEven;
+       }
+   
+       return (nCheck % 10) == 0;
+}
+
+exports.validateNum = (num) =>{
+   return isNaN(num)
 }
