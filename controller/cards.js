@@ -10,19 +10,19 @@ exports.addCard = async (req, res, next)=>{
     //check if the name and trans_limit is not empty
     if(!name && !trans_limit){
         
-      res.status(201).json({
+      res.status(400).json({
         success: false,
         message: "Name or limit cannot be empty"
       })
       //Check if credit card is numeric
     }else if(validateNum(card_number)){
-      res.status(201).json({
+      res.status(400).json({
         success: false,
         message: "Card Number must be numeric"
       })
       //check if it is a valid credit card
      }else if(!validateLuhn(card_number)){
-      res.status(201).json({
+      res.status(400).json({
         success: false,
         message: "Please enter a valid credit card number"
       })
