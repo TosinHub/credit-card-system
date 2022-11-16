@@ -30,7 +30,6 @@ describe("CREDIT CARD SYSTEM", () => {
       .then((res) => {
         expect(res.body)
         expect(res.body.json)
-        expect(res.body.json.message)
       });
   });
 
