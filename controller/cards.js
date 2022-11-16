@@ -9,6 +9,7 @@ exports.addCard = async (req, res, next)=>{
     const {name,card_number,trans_limit} = req.body
     //check if the name is not empty
     if(!name){
+        
       res.status(201).json({
         success: false,
         message: "Name cannot be empty"
@@ -47,9 +48,6 @@ exports.addCard = async (req, res, next)=>{
     const result = await dbConnect.fetch()
       
     if(result){
-      res.status(200).json({
-        success : true,
-        data: result
-      })
+      res.status(200).json(result)
   }
   }

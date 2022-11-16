@@ -2,29 +2,23 @@ const request = require("supertest");
 const app = require("./app");
 
 describe("CREDIT CARD SYSTEM", () => {
+  it("POST  /cards ---> created cards ", async () => {
+    const res = await request(app)
 
-
-  it("POST  /cards ---> created cards ", () => {
-    return request(app)
       .post("/cards")
       .send({
-        name: "Oluwatosin Gbenga",
-        card_number: 4353342343425,
-        limit: 2000
-      })
-      .expect("Content-Type", /json/)
-      .expect(201)
-      .then((response) => {
-        expect(response.body).toEqual(
-            expect.objectContaining({
-              name: "Oluwatosin Gbenga",
-              card_number: 4353342343425,
-              limit: 2000
-            }),
-        
-        );
+        name: "Oluwaseun Adebola",
+        card_number: "5399836647231989",
+        trans_limit: 4000
       });
-  });
+
+      expect(res.status).toEqual(201)
+      expect(res.body)
+      expect(res.body.json)
+
+
+      });
+  
 
 
 
@@ -33,17 +27,12 @@ describe("CREDIT CARD SYSTEM", () => {
       .get("/cards")
       .expect("Content-Type", /json/)
       .expect(200)
-      .then((response) => {
-        expect(response.body).toEqual(
-          expect.arrayContaining([
-            expect.objectContaining({
-              card_id: 2,
-              name: expect.any(String),
-              card_number: expect.any(Number),
-              limit: expect.any(Number),
-            }),
-          ])
-        );
+      .then((res) => {
+        expect(res.body)
+        expect(res.body.json)
+        expect(res.body.json.message)
       });
   });
+
+  
 });
