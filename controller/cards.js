@@ -48,6 +48,9 @@ exports.addCard = async (req, res, next)=>{
     const result = await dbConnect.fetch()
       
     if(result){
-      res.status(200).json(result)
+      res.status(200).json({
+        success: true,
+        data: result
+      })
   }
   }
