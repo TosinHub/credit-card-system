@@ -7,12 +7,12 @@ const {validateLuhn, validateNum} = require('../validate')
 
 exports.addCard = async (req, res, next)=>{
     const {name,card_number,trans_limit} = req.body
-    //check if the name is not empty
-    if(!name){
+    //check if the name and trans_limit is not empty
+    if(!name && !trans_limit){
         
       res.status(201).json({
         success: false,
-        message: "Name cannot be empty"
+        message: "Name or limit cannot be empty"
       })
       //Check if credit card is numeric
     }else if(validateNum(card_number)){
